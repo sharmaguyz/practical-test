@@ -1,0 +1,47 @@
+<%- include(`/${root}/emails/layouts/base`, { 
+    subject: 'Welcome! Your Account Has Been Successfully Created',
+    root: root,
+    appName: appName,
+    logoUrl: logoUrl,
+    userName: userName,
+    email: email,
+    password: password,
+    loginLink: loginLink,
+    rolename:rolename,
+    body: `
+      <section style="max-width: 600px; margin: 0 auto; padding: 30px 0 0 0;">
+        <div style="border: 1px solid #5B189B;">
+          <div style="border-bottom: 1px solid #5b189b;text-align: center;background-color: #FFFFFF;padding: 17px 15px;">
+            <a href="#" style="font-size: 28px;text-decoration: none;color:#000;font-weight: 600;font-family: 'Montserrat', sans-serif; display:inline-block;">
+              <img src="${logoUrl}" alt="Logo" style="width: 80%;">
+            </a>
+          </div>
+          <div style="max-width: 700px; margin: 0 auto;">
+            <div style="font-family: 'Montserrat', sans-serif;padding: 30px;border-radius: 8px;box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);font-size: 15px;line-height: 23px;">
+              <p>Hi <strong>${userName}</strong>,</p>
+              <p>Your account as <strong>${rolename === "STUDENT" ? 'student' : 'instructor'}</strong> has been successfully created by the Admin.</p>
+              <p><strong>Please find your login credentials below:</strong></p>
+              <ul style="list-style: none; padding-left: 0;">
+                <li><strong>Username:</strong> ${email}</li>
+                <li><strong>Password:</strong> ${password}</li>
+              </ul>
+              <p>
+                You can log in using these credentials and access your dashboard here:
+                <a href="${loginLink}" style="color: #5B189B; text-decoration: none; font-weight: bold;">Login</a>
+              </p>
+              <p>If you have any questions or need assistance, feel free to reach out.</p>
+              <p>Welcome aboard!</p>
+              <p>Best regards,<br><strong>${process.env.APP_NAME}</strong></p>
+            </div>
+          </div>
+          <div style="text-align: center; border-top: 1px solid #5b189b; background-color: #ffffff; padding: 15px 15px;">
+            <p style="font-size: 14px; color:#5B189B; line-height: 18px; margin: 0; font-family: 'Montserrat', sans-serif; font-weight: 400;">
+              &copy; <strong>${new Date().getFullYear()} ${process.env.APP_NAME}. All rights reserved.</strong>
+            </p>
+          </div>
+        </div>
+      </section>
+    `,
+    unsubscribeLink: null
+  }) %>
+  

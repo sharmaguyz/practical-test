@@ -1,0 +1,7 @@
+<footer style="background-color: #f8f9fa; padding: 20px; text-align: center; font-size: 12px; color: #666;">
+    <p>&copy; <%= currentYear %> <%= appName %>. All rights reserved.</p>
+    <% if (unsubscribeLink) { %>
+        <p><a href="<%= unsubscribeLink %>" style="color: #666;">Unsubscribe</a></p>
+    <% } %>
+    <p>Contact us at <a href="mailto:<%= supportEmail %>" style="color: #666;"><%= supportEmail %></a></p>
+</footer>

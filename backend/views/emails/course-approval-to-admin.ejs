@@ -1,0 +1,38 @@
+<%- include(`/${root}/emails/layouts/base`, { subject: 'Course Rejected!' , root: root, appName: appName, logoUrl:
+    logoUrl, userName: userName, courseName: courseName, categoryName, courseSubmission, instructorName, body: ` <section
+    style="max-width: 600px; margin: 0 auto; padding: 30px 0 0 0;">
+    <div style="border: 1px solid #5B189B;">
+        <div style="border-bottom: 1px solid #5b189b;text-align: center;background-color: #FFFFFF;padding: 17px 15px;">
+            <a href="#"
+                style="font-size: 28px;text-decoration: none;color:#000;font-weight: 600;font-family: 'Montserrat', sans-serif; display:inline-block;">
+                <img src="${logoUrl}" alt="Logo" style="width: 80%;">
+            </a>
+        </div>
+        <div style="max-width: 700px; margin: 0 auto;">
+            <div
+                style="font-family: 'Montserrat', sans-serif;padding: 30px;border-radius: 8px;box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);font-size: 15px;line-height: 23px;">
+                <p>Hello <strong>${userName}</strong>,</p>
+                <p>A course has been submitted by an instructor and is awaiting your approval.</p>
+                <p>
+                    <strong>Course Details:</strong><br />
+                    <span><strong>Course Title:</strong> ${courseName}</span> <br/>
+                    <span><strong>Instructor Name:</strong> ${instructorName}</span> <br/>
+                    <span><strong>Submission Date:</strong> ${courseSubmission}</span> <br/>
+                    <span><strong>Category:</strong> ${categoryName}</span>
+                </p>
+                <p>Please review the course content and take the appropriate action (approve or reject) from your admin
+                    dashboard.</p>
+                <p>Best regards,<br><strong>${process.env.APP_NAME}</strong></p>
+            </div>
+        </div>
+        <div style="text-align: center; border-top: 1px solid #5b189b; background-color: #ffffff; padding: 15px 15px;">
+            <p
+                style="font-size: 14px; color:#5B189B; line-height: 18px; margin: 0; font-family: 'Montserrat', sans-serif; font-weight: 400;">
+                &copy; <strong>${new Date().getFullYear()} ${process.env.APP_NAME}. All rights reserved.</strong>
+            </p>
+        </div>
+    </div>
+    </section>
+    `,
+    unsubscribeLink: null
+    }) %>

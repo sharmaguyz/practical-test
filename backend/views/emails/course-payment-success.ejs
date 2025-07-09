@@ -1,0 +1,107 @@
+<%- include(`/${root}/emails/layouts/base`, { 
+  subject: 'Course Payment successful!',
+  root,
+  appName,
+  logoUrl,
+  userName,
+  courses,
+  courseData,
+  invoiceDetail,
+  invoiceCourses,
+  body: `
+    <section style="max-width: 600px; margin: 0 auto; padding: 30px 0 0 0;">
+      <div style="border: 1px solid #5B189B;">
+        <div style="border-bottom: 1px solid #5b189b; text-align: center; background-color: #FFFFFF; padding: 17px 15px;">
+          <a href="#" style="font-size: 28px; text-decoration: none; color:#000; font-weight: 600; font-family: 'Montserrat', sans-serif; display:inline-block;">
+            <img src="${logoUrl}" alt="Logo" style="width: 80%;">
+          </a>
+        </div>
+        <div style="max-width: 700px; margin: 0 auto;">
+          <div style="font-family: 'Montserrat', sans-serif; padding: 30px; border-radius: 8px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.05); font-size: 15px; line-height: 23px;">
+            <p>Congratulations!</p>
+            <p>Hi <strong>Dear ${userName || ''},</strong></p>
+            <p>Thank you for purchasing the courses! Payment was successful.</p>
+            <p>Please find your courses below.</p>
+
+            <table cellpadding="8" cellspacing="0" width="100%" border="1" style="border-collapse: collapse; font-family: 'Montserrat', sans-serif; font-size: 14px;">
+              <thead style="background-color: #F3F3F3; color: #333;">
+                <tr>
+                  <th align="left">Sr No</th>
+                  <th align="left">Course Image</th>
+                  <th align="left">Course Name</th>
+                  <th align="left">Price</th>
+                  <th align="left">Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                ${courseData}
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div style="max-width: 850px; margin: auto; background: #fff; padding: 30px 40px; border: 1px solid #ddd; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.05);">
+           <div style="text-align: center; margin-bottom: 20px;">
+            <div style="font-size: 14px; line-height: 1.5;">
+              <strong>Practical Academy</strong><br>
+              www.practical-academy.com<br>
+              support@practical-academy.com
+            </div>
+          </div>
+          <div style="display: flex; justify-content: space-between; flex-wrap: wrap; margin-top: 30px;">
+            <div style="width: 48%;">
+              <div style="font-weight: bold; margin-bottom: 5px; color: #000;">Student Information</div>
+              <div style="margin-bottom: 6px;"><strong>Name:</strong> ${invoiceDetail?.data?.user?.fullName || ''}</div>
+              <div style="margin-bottom: 6px;"><strong>Email:</strong> ${invoiceDetail?.data?.user?.email || ''}</div>
+              <div style="margin-bottom: 6px;"><strong>Phone:</strong> ${invoiceDetail?.data?.user?.phone || ''}</div>
+              <div style="margin-bottom: 6px;">
+                <strong>Payment Mode:</strong>
+                ${invoiceDetail?.data?.order?.paymentMode
+                  ? invoiceDetail.data.order.paymentMode.charAt(0).toUpperCase() + invoiceDetail.data.order.paymentMode.slice(1)
+                  : ''}
+              </div>
+            </div>
+
+            <div style="width: 48%; text-align: right;">
+              <div style="font-weight: bold; margin-bottom: 5px; color: #000;">Invoice Details</div>
+              <div style="margin-bottom: 6px;"><strong>Invoice:</strong> INV-${invoiceDetail?.data?.order?.id || ''}</div>
+              <div style="margin-bottom: 6px;"><strong>Date:</strong> ${invoiceDetail?.data?.order?.createdAt ? new Date(invoiceDetail.data.order.createdAt).toLocaleDateString() : ''}</div>
+            </div>
+          </div>
+
+          <div style="font-weight: bold; margin-top: 30px; margin-bottom: 10px; border-bottom: 1px solid #ccc; padding-bottom: 5px; color: #000;">Course Details</div>
+          <table style="width: 100%; border-collapse: collapse; margin-top: 10px;">
+            <thead>
+              <tr style="background: #f1f1f1;">
+                <th style="border: 1px solid #ccc; padding: 8px 10px; text-align: left;">S.No.</th>
+                <th style="border: 1px solid #ccc; padding: 8px 10px; text-align: left;">Course Name</th>
+                <th style="border: 1px solid #ccc; padding: 8px 10px; text-align: left;">Start Date</th>
+                <th style="border: 1px solid #ccc; padding: 8px 10px; text-align: left;">End Date</th>
+                <th style="border: 1px solid #ccc; padding: 8px 10px; text-align: left;">Price ($)</th>
+              </tr>
+            </thead>
+            <tbody>
+              ${invoiceCourses}
+            </tbody>
+            <tfoot>
+              <tr style="background: #fafafa;">
+                <td colspan="4" style="border: 1px solid #ccc; padding: 8px 10px; text-align: right; font-weight: bold;">Total</td>
+                <td style="border: 1px solid #ccc; padding: 8px 10px; font-weight: bold;">$${courses.reduce((sum, c) => sum + Number(c.price || 0), 0)}.00</td>
+              </tr>
+            </tfoot>
+          </table>
+          <p>If you have any questions or need assistance, feel free to reach out.</p>
+          <p>Best regards,<br><strong>${process.env.APP_NAME}</strong></p>
+          <p><strong>support@practical-academy.com</strong></p>
+        </div>
+
+        <div style="text-align: center; border-top: 1px solid #5b189b; background-color: #ffffff; padding: 15px 15px;">
+          <p style="font-size: 14px; color:#5B189B; line-height: 18px; margin: 0; font-family: 'Montserrat', sans-serif; font-weight: 400;">
+            &copy; <strong>${new Date().getFullYear()} ${process.env.APP_NAME || 'Practical Academy'}. All rights reserved.</strong>
+          </p>
+        </div>
+      </div>
+    </section>
+  `,
+  unsubscribeLink: null
+}) %>

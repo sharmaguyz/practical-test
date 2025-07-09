@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>
+        <%= subject %>
+    </title>
+    <%- include(`/${root}/emails/components/styles`) %>
+    <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title><%= subject %></title>
+
+  <!-- Add Montserrat font from Google Fonts -->
+  <!-- <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet"> -->
+
+  <!-- Optional: Email-safe CSS -->
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Montserrat', sans-serif;
+      background-color: #ffffff;
+    }
+  </style>
+</head>
+
+</head>
+
+<body>
+    <div class="content" style="display: flex; justify-content: center;">
+        <%- body %>
+    </div>
+    <!-- <%- include(`/${root}/emails/components/footer`, { appName, supportEmail, currentYear: new Date().getFullYear(), unsubscribeLink }) %> -->
+</body>
+
+</html>
